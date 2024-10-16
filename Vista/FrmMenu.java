@@ -5,6 +5,8 @@
 package Vista;
 
 import java.awt.Graphics;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -22,6 +24,27 @@ public class FrmMenu extends javax.swing.JFrame {
     public FrmMenu(java.awt.Frame parent, boolean modal) {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        // Ajustar la posición de los botones al tamaño de la ventana
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                ajustarPosiciones();
+            }
+        });
+    }
+
+    private void ajustarPosiciones() {
+        int frameWidth = getWidth();
+        int frameHeight = getHeight();
+
+        // Ajuste para que los botones queden más centrados en los círculos amarillos
+        int xReina = (int) (frameWidth * 0.37); // Ajustar para colocar debajo del ícono de la reina
+        int xCaballo = (int) (frameWidth * 0.55); // Ajustar para colocar debajo del ícono del caballo
+        int yPos = (int) (frameHeight * 0.70); // Ajustar para la posición vertical correcta
+
+        btnReinas.setLocation(xReina, yPos);
+        btnCaballo.setLocation(xCaballo, yPos);
     }
 
     /**
@@ -45,14 +68,30 @@ public class FrmMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        btnCaballo.setForeground(new java.awt.Color(255, 255, 255));
+        btnCaballo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/play32.png"))); // NOI18N
         btnCaballo.setText("Caballo");
+        btnCaballo.setContentAreaFilled(false);
+        btnCaballo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCaballo.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/play32.png"))); // NOI18N
+        btnCaballo.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/play64.png"))); // NOI18N
+        btnCaballo.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btnCaballo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnCaballo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCaballoActionPerformed(evt);
             }
         });
 
+        btnReinas.setForeground(new java.awt.Color(255, 255, 255));
+        btnReinas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/play32.png"))); // NOI18N
         btnReinas.setText("Reinas");
+        btnReinas.setContentAreaFilled(false);
+        btnReinas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnReinas.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/play32.png"))); // NOI18N
+        btnReinas.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/play64.png"))); // NOI18N
+        btnReinas.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btnReinas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnReinas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReinasActionPerformed(evt);
@@ -76,7 +115,7 @@ public class FrmMenu extends javax.swing.JFrame {
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(231, Short.MAX_VALUE)
+                .addContainerGap(195, Short.MAX_VALUE)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCaballo)
                     .addComponent(btnReinas))
@@ -98,15 +137,12 @@ public class FrmMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCaballoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCaballoActionPerformed
-
         ViewHorse view = new ViewHorse(null, false);
         view.setVisible(true);
         view.ejecutarRecorrido();
-
     }//GEN-LAST:event_btnCaballoActionPerformed
 
     private void btnReinasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReinasActionPerformed
-
         ViewReina view = new ViewReina(null, false);
         view.setVisible(true);
     }//GEN-LAST:event_btnReinasActionPerformed
