@@ -3,6 +3,10 @@ package Juego;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ *
+ * @author Crisp
+ */
 public class TableroReina extends JPanel {
 
     private final int[] tablero; // Posiciones de las reinas
